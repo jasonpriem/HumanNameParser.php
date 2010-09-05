@@ -1,13 +1,19 @@
 Name:			HumanNameParse.php
+
 Version:		0.1
+
 Date:			3 Sept. 2010
+
 Author:		Jason Priem <jason@jasonpriem.com>
-Website:		http://jasonpriem.com/humannameparser-php
-License:		http://www.opensource.org/licenses/mit-license.php
+
+Website:		<http://jasonpriem.com/humannameparser-php>
+
+License:		<http://www.opensource.org/licenses/mit-license.php>
+
 
 # Description
 Takes human names of arbitrary complexity and various wacky formats, and parses
-out the the
+out the"
 
 * leading initial (Like 'J.' in 'J. Walter Weatherman')
 * first name (or first initial in a name like 'R. Crumb')
@@ -21,12 +27,12 @@ out the the
 * Parses comma-reversed names ('Smith, John'), names with non-English symbols,
 names with odd capitalization or punctuation ('e e cummings'), first names made
 of initials ('J.K. Rowling'), etc.  (See testNames.txt for more).
-* captures leading initials seperately, instead of calling them first names.
+* Captures leading initials seperately, instead of calling them first names.
 * Easy to hack:
-** object-oriented PHP
-** uses simple regular expressions for matching
-** includes suite of test names and a testing interface, as well as [PHPUnit]("http://www.phpunit.de/") tests.
-** fully-documented for [PHPdoc]("http://www.phpdoc.org/").
+   * object-oriented PHP
+   * uses simple regular expressions for matching
+   * includes suite of test names and a testing interface, as well as [PHPUnit]("http://www.phpunit.de/") tests
+   * fully-documented for [PHPdoc]("http://www.phpdoc.org/")
 
 # Usage:
 
@@ -41,7 +47,7 @@ of initials ('J.K. Rowling'), etc.  (See testNames.txt for more).
     echo $parser->getFirst() . ' ' . $parser->getLast(); // returns 'John de la Rúa'
 
     //   You can also get the names as an array
-    print_r($parser->getArr()); // array( [leadingInit] => 'C.', [first] => 'John' ... )
+    print_r($parser->getArr()); // returns array( [leadingInit] => 'C.', [first] => 'John' ... )
 
     // 4. Use the setter method for new names
     $parser->setName("Angela H. Brooks");
@@ -66,7 +72,7 @@ they could be added easily.
 
 # Credits
 
-Thanks to Keith Beckman for ]nameparse.php](http://alphahelical.com/code/misc/nameparse/);
+Thanks to Keith Beckman for [nameparse.php](http://alphahelical.com/code/misc/nameparse/);
 I expanded a bit on his lists of suffixes and prefixes.
 Also thanks to Jed Hartman, who as far as I can tell wrote the first one of these
-('http://alphahelical.com/code/misc/nameparse/').
+<http://alphahelical.com/code/misc/nameparse/>.
