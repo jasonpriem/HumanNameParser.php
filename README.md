@@ -60,7 +60,7 @@ Test namestestNames.txt contains the test names and correct parsings of each one
 The included index.php will run the parser and test against each name. This list is
 a good way to see how the parser will parse a given name. Lines are formatted like this:
 
-    <name string>|<first initial>|<firstname>|<middlenames>|<lastname>|<suffix>
+    <name string>|<first initial>|<firstname>|<nicknames>|<middlenames>|<lastname>|<suffix>
 
 # Issues
 
