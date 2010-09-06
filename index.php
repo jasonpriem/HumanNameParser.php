@@ -24,6 +24,7 @@
 			 <ol>
 				 <li>Leading initial</li>
 				 <li>First name</li>
+				 <li>Nicknames</li>
 				 <li>Middle names</li>
 				 <li>Last names (surnames)</li>
 				 <li>Suffixes (like "Jr.")</li>
@@ -59,9 +60,10 @@
 			  // check to see if the parser got each name-part correct
 			  $ret  = testEqual($nameArr[1], $parser->getleadingInit()	);
 			  $ret .= testEqual($nameArr[2], $parser->getFirst()		);
-			  $ret .= testEqual($nameArr[3], $parser->getMiddle()		);
-			  $ret .= testEqual($nameArr[4], $parser->getLast()		);
-			  $ret .= testEqual($nameArr[5], $parser->getSuffix()		);
+			  $ret .= testEqual($nameArr[3], $parser->getNicknames()		);
+			  $ret .= testEqual($nameArr[4], $parser->getMiddle()		);
+			  $ret .= testEqual($nameArr[5], $parser->getLast()		);
+			  $ret .= testEqual($nameArr[6], $parser->getSuffix()		);
 			  $divClass = (strpos($ret, "class='fail'")) ? "fail" : "win"; // a hacky way to do this
 			  echo "<div class='name $divClass'><h2 class='test-name'>{$nameArr[0]}</h2>$ret</div>";
 		  }

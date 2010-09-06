@@ -57,8 +57,12 @@ class Name {
 		 $regex = $regex . "ui" . $regexFlags; // unicode + case-insensitive
 		 preg_match($regex, $this->str, $m);
 		 $subset = (isset($m[$submatchIndex])) ? $m[$submatchIndex] : '';
+
 		 if ($subset){
-			 $this->chopEnd($subset);
+			 $this->str = preg_replace($regex, ' ', $this->str, -1, $numReplacements);
+			 if ($numReplacements > 1){
+				 throw new Exception("The regex being used to find the name has multiple matches.");
+			 }
 			 $this->norm();
 			 return $subset;
 		 }
@@ -87,35 +91,6 @@ class Name {
 		}
 		return true; // if there's 1 or 0 $flipAroundChar found
 	 }
-
-	 /**
-	  * Removes a given sub-string from one of the ends of $this->str
-	  *
-	  * @param String	$subStr	sub-string to be removed
-	  * @return Bool True on success
-	  */
-	 private function chopEnd($subStr)
-	 {
-		 mb_internal_encoding("UTF-8");
-
-		 $wholeStrLen = mb_strlen($this->str);
-		 $subStrLen = mb_strlen($subStr);
-		 $pos = mb_strpos($this->str, $subStr);
-		 $reversePos = $wholeStrLen - $subStrLen - $pos; //distance from the end of $subStr to end of $wholeStr
-		 if ($pos == 0 ){ // at the beginning of the namestring
-			 $this->str = mb_substr($this->str, $subStrLen + 1);
-		 }
-		 else if ($reversePos == 0){ // at the end of the namestring
-			 $this->str = mb_substr($this->str, 0, $pos);
-		 }
-		 else {
-			 throw new Exception("The substring '$subStr' is in the middle of the name '{$this->str}'.");
-		 }
-
-		 $this->norm();
-		 return true;
-	 }
-
 
 	/**
 	* Removes extra whitespace and punctuation from $this->str

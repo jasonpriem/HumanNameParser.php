@@ -13,6 +13,7 @@ class Parser {
     private $nameStr;
 	 private $leadingInit;
 	 private $first;
+	 private $nicknames;
 	 private $middle;
 	 private $last;
 	 private $suffix;
@@ -47,6 +48,7 @@ class Parser {
 
 		  $this->leadingInit = "";
 		  $this->first = "";
+		  $this->nicknames = "";
 		  $this->middle = "";
 		  $this->last = "";
 		  $this->suffix = "";
@@ -64,6 +66,9 @@ class Parser {
 
 	  public function getFirst() {
 		  return $this->first;
+	  }
+	  public function getNicknames() {
+		  return $this->nicknames;
 	  }
 
 	  public function getMiddle() {
@@ -88,6 +93,7 @@ class Parser {
 		  $arr = array();
 		  $arr['leadingInit'] = $this->leadingInit;
 		  $arr['first'] = $this->first;
+		  $arr['nicknames'] = $this->nicknames;
 		  $arr['middle'] = $this->middle;
 		  $arr['last'] = $this->last;
 		  $arr['suffix'] = $this->suffix;
@@ -115,11 +121,18 @@ class Parser {
 		  $suffixes = implode("\.*|", $this->suffixes) . "\.*"; // each suffix gets a "\.*" behind it.
 		  $prefixes = implode(" |", $this->prefixes) . " "; // each prefix gets a " " behind it.
 
-		  $suffixRegex =		"/,* *($suffixes)$/"; 
-		  $lastRegex =			"/([^ ]+ y |$prefixes)*[^ ]+$/"; // requires correct order (no commas), no suffix
-		  $leadingInitRegex =	"/^(.\.*) \p{L}{2}/"; // requires correct order, no suffix, no last name,
-		  $firstRegex =		"/^[^ ]+/"; // requires correct order, no suffix, no last name, no first initial
- 
+		  // The regex use is a bit tricky.  *Everything* matched by the regex will be replaced,
+		  //	but you can select a particular parenthesized submatch to be returned.
+		  //	Also, note that each regex requres that the preceding ones have been run, and matches chopped out.
+		  $nicknamesRegex =		"/ ('|\"|\(\"*'*)(.+?)('|\"|\"*'*\)) /"; // names that starts or end w/ an apostrophe break this
+		  $suffixRegex =			"/,* *($suffixes)$/";
+		  $lastRegex =				"/([^ ]+ y |$prefixes)*[^ ]+$/";
+		  $leadingInitRegex =	"/^(.\.*)(?= \p{L}{2})/"; // note the lookahead, which isn't returned or replaced
+		  $firstRegex =			"/^[^ ]+/"; //
+
+		  // get nickname, if there is one
+		  $this->nicknames = $this->nameStr->chopWithRegex($nicknamesRegex, 2);
+
 		  // get suffix, if there is one
 		  $this->suffix = $this->nameStr->chopWithRegex($suffixRegex, 1);
 

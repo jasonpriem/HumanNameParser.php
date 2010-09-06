@@ -1,22 +1,24 @@
 Name:			HumanNameParse.php
 
-Version:		0.1
+Version:		0.2
 
-Date:			3 Sept. 2010
+Date:			6 Sept. 2010
 
 Author:		Jason Priem <jason@jasonpriem.com>
 
-Website:		<http://jasonpriem.com/humannameparser-php>
+Website:		<http://jasonpriem.com/humannameparser-php> (Please leave comments and
+				feature requests there)
 
 License:		<http://www.opensource.org/licenses/mit-license.php>
 
 
 # Description
 Takes human names of arbitrary complexity and various wacky formats, and parses
-out the"
+out the:
 
 * leading initial (Like 'J.' in 'J. Walter Weatherman')
 * first name (or first initial in a name like 'R. Crumb')
+* nicknames, like the "Butch" in "Paul 'Butch' Davis, Jr."
 * middle names
 * last name (including compound ones like 'van der Sar' and 'Ortega y Gasset')
 * suffix (like 'Jr.', 'III')
@@ -27,7 +29,7 @@ out the"
 * Parses comma-reversed names ('Smith, John'), names with non-English symbols,
 names with odd capitalization or punctuation ('e e cummings'), first names made
 of initials ('J.K. Rowling'), etc.  (See testNames.txt for more).
-* Captures leading initials seperately, instead of calling them first names.
+* Captures leading initials and nicknames seperately, instead of calling them first or middle names.
 * Easy to hack:
    * object-oriented PHP
    * uses simple regular expressions for matching

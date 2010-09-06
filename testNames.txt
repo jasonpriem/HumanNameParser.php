@@ -1,23 +1,29 @@
-Björn Brembs||Björn||Brembs|
-Jason Priem||Jason||Priem|
-Björn Brembs-Muñoz||Björn||Brembs-Muñoz|
-Björn C. Brembs||Björn|C.|Brembs|
-Björn C Brembs||Björn|C|Brembs|
-Björn C. R. Brembs||Björn|C. R.|Brembs|
-Björn Charles Brembs||Björn|Charles|Brembs|
-Björn Charles R. Brembs||Björn|Charles R.|Brembs|
-Björn van Brembs||Björn||van Brembs|
-Björn Charles van der Brembs||Björn|Charles|van der Brembs|
-Björn Charles Brembs y Muñoz||Björn|Charles|Brembs y Muñoz|
-Björn Brembs, Jr.||Björn||Brembs|Jr.
-Björn Brembs Jr||Björn||Brembs|Jr
-B Brembs||B||Brembs|
-C. Björn Roger Brembs|C.|Björn|Roger|Brembs|
-B. C. Brembs||B.|C.|Brembs|
-B C Brembs||B|C|Brembs|
-B.J. Thomas||B.J.||Thomas|
-Brembs, Björn||Björn||Brembs|
-Brembs, Björn Jr||Björn||Brembs|Jr
-Brembs, C. Björn|C.|Björn||Brembs|
-Brembs, C. Björn III|C.|Björn||Brembs|III
-Brembs y Muñoz, C. Björn Roger III|C.|Björn|Roger|Brembs y Muñoz|III
+Björn O'Malley||Björn|||O'Malley|
+Jason H. Priem||Jason||H.|Priem|
+Björn O'Malley-Muñoz||Björn|||O'Malley-Muñoz|
+Björn C. O'Malley||Björn||C.|O'Malley|
+Björn "Bill" O'Malley||Björn|Bill||O'Malley|
+Björn ("Bill") O'Malley||Björn|Bill||O'Malley|
+Björn ("Wild Bill") O'Malley||Björn|Wild Bill||O'Malley|
+Björn (Bill) O'Malley||Björn|Bill||O'Malley|
+Björn 'Bill' O'Malley||Björn|Bill||O'Malley|
+Björn C O'Malley||Björn||C|O'Malley|
+Björn C. R. O'Malley||Björn||C. R.|O'Malley|
+Björn Charles O'Malley||Björn||Charles|O'Malley|
+Björn Charles R. O'Malley||Björn||Charles R.|O'Malley|
+Björn van O'Malley||Björn|||van O'Malley|
+Björn Charles van der O'Malley||Björn||Charles|van der O'Malley|
+Björn Charles O'Malley y Muñoz||Björn||Charles|O'Malley y Muñoz|
+Björn O'Malley, Jr.||Björn|||O'Malley|Jr.
+Björn O'Malley Jr||Björn|||O'Malley|Jr
+B O'Malley||B|||O'Malley|
+William Carlos Williams||William||Carlos|Williams|
+C. Björn Roger O'Malley|C.|Björn||Roger|O'Malley|
+B. C. O'Malley||B.||C.|O'Malley|
+B C O'Malley||B||C|O'Malley|
+B.J. Thomas||B.J.|||Thomas|
+O'Malley, Björn||Björn|||O'Malley|
+O'Malley, Björn Jr||Björn|||O'Malley|Jr
+O'Malley, C. Björn|C.|Björn|||O'Malley|
+O'Malley, C. Björn III|C.|Björn|||O'Malley|III
+O'Malley y Muñoz, C. Björn Roger III|C.|Björn||Roger|O'Malley y Muñoz|III
