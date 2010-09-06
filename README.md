@@ -6,7 +6,7 @@ Date:			6 Sept. 2010
 
 Author:		Jason Priem <jason@jasonpriem.com>
 
-Website:		<http://jasonpriem.com/humannameparser-php> 
+Website:		<http://jasonpriem.com/human-name-parse>
 
 License:		<http://www.opensource.org/licenses/mit-license.php>
 
@@ -27,5 +27,5 @@ and parses out the:
 * last name (including compound ones like "van der Sar' and "Ortega y Gasset"), and
 * suffix (like 'Jr.', 'III')
 
-See [the website](http://jasonpriem.com/humannameparser-php) for usage, features, issues, credits, and documentation.
+See [the website](http://jasonpriem.com/human-name-parse) for usage, features, issues, credits, and documentation.
 You can also leave comments and requests there.
