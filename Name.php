@@ -20,14 +20,6 @@ class Name {
 	  */
 	 public function setStr($str)
 	 {
-		 // test to make sure PCRE will work with unicode
-		  $testStr = "Björn Brembs";
-		  preg_match("/\w+/u", $testStr, $m);
-		  if ($m[0] != "Björn") {
-			  throw new Exception (
-						 "It seems that your php version does not support PCRE unicode functions.");
-		  }
-
 		 if (!mb_check_encoding($str)){
 			 throw new Exception("Name is not encoded in UTF-8");
 		 }
