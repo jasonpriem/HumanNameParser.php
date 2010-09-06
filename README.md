@@ -13,14 +13,19 @@ License:		<http://www.opensource.org/licenses/mit-license.php>
 
 
 # Description
-Takes human names of arbitrary complexity and various wacky formats, and parses
-out the:
+Takes human names of arbitrary complexity and various wacky formats like:
 
-* leading initial (Like 'J.' in 'J. Walter Weatherman')
+* J. Walter Weatherman 
+* de la Cruz, Ana M. 
+* James C. ('Jimmy') O'Dell, Jr.
+
+and parses out the:
+
+* leading initial (Like "J." in "J. Walter Weatherman")
 * first name (or first initial in a name like 'R. Crumb')
-* nicknames, like the "Butch" in "Paul 'Butch' Davis, Jr."
+* nicknames (like "Jimmy" in "James C. ('Jimmy') O'Dell, Jr.")
 * middle names
-* last name (including compound ones like 'van der Sar' and 'Ortega y Gasset')
+* last name (including compound ones like "van der Sar' and "Ortega y Gasset"), and
 * suffix (like 'Jr.', 'III')
 
 
