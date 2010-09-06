@@ -7,7 +7,7 @@ Date:			6 Sept. 2010
 Author:		Jason Priem <jason@jasonpriem.com>
 
 Website:		<http://jasonpriem.com/humannameparser-php> (Please leave comments and
-				feature requests there)
+feature requests there)
 
 License:		<http://www.opensource.org/licenses/mit-license.php>
 
