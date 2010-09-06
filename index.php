@@ -53,7 +53,7 @@
 			  return $ret;
 		  }
 
-		  $handle = fopen('./testNames.txt', 'r');
+		  $handle = fopen('./Tests/testNames.txt', 'r');
 		  while ($nameArr = fgetcsv($handle, 1000, "|")){
 			  $parser = new Parser(new Name($nameArr[0]));
 	
