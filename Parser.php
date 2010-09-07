@@ -63,7 +63,6 @@ class Parser {
 	  public function getleadingInit() {
 		  return $this->leadingInit;
 	  }
-
 	  public function getFirst() {
 		  return $this->first;
 	  }
@@ -126,32 +125,32 @@ class Parser {
 		  //	Also, note that each regex requres that the preceding ones have been run, and matches chopped out.
 		  $nicknamesRegex =		"/ ('|\"|\(\"*'*)(.+?)('|\"|\"*'*\)) /"; // names that starts or end w/ an apostrophe break this
 		  $suffixRegex =			"/,* *($suffixes)$/";
-		  $lastRegex =				"/([^ ]+ y |$prefixes)*[^ ]+$/";
+		  $lastRegex =				"/(?!^)([^ ]+ y |$prefixes)*[^ ]+$/";
 		  $leadingInitRegex =	"/^(.\.*)(?= \p{L}{2})/"; // note the lookahead, which isn't returned or replaced
 		  $firstRegex =			"/^[^ ]+/"; //
 
 		  // get nickname, if there is one
 		  $this->nicknames = $this->nameStr->chopWithRegex($nicknamesRegex, 2);
-
+	  echo $this->nameStr->getStr() . "/n";
 		  // get suffix, if there is one
 		  $this->suffix = $this->nameStr->chopWithRegex($suffixRegex, 1);
-
+	  echo $this->nameStr->getStr() . "/n";
 		  // flip the before-comma and after-comma parts of the name
 		  $this->nameStr->flip(",");
-
+	  echo $this->nameStr->getStr() . "/n";
 		  // get the last name
 		  $this->last = $this->nameStr->chopWithRegex($lastRegex, 0);
 		  if (!$this->last){
 			  throw new Exception("Couldn't find a last name in '{$this->nameStr->getStr()}'.");
 		  }
-
+	  echo $this->nameStr->getStr() . "/n";
 		  // get the first initial, if there is one
 		  $this->leadingInit = $this->nameStr->chopWithRegex($leadingInitRegex, 1);
-
+	  echo $this->nameStr->getStr() . "/n";
 		  // get the first name
 		  $this->first = $this->nameStr->chopWithRegex($firstRegex, 0);
 		  if (!$this->first){
-			  throw new Exception("Couldn't find a first name in '{$this->nameStr->getStr()}'.");
+			  throw new Exception("Couldn't find a first name in '{$this->nameStr->getStr()}'");
 		  }
 
 		  // if anything's left, that's the middle name
