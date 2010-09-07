@@ -128,7 +128,7 @@ class HumanNameParser_Parser {
 		  //	Also, note that each regex requres that the preceding ones have been run, and matches chopped out.
 		  $nicknamesRegex =		"/ ('|\"|\(\"*'*)(.+?)('|\"|\"*'*\)) /"; // names that starts or end w/ an apostrophe break this
 		  $suffixRegex =			"/,* *($suffixes)$/";
-		  $lastRegex =				"/(?!^)([^ ]+ y |$prefixes)*[^ ]+$/";
+		  $lastRegex =				"/(?!^)\b([^ ]+ y |$prefixes)*[^ ]+$/";
 		  $leadingInitRegex =	"/^(.\.*)(?= \p{L}{2})/"; // note the lookahead, which isn't returned or replaced
 		  $firstRegex =			"/^[^ ]+/"; //
 
