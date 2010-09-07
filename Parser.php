@@ -26,7 +26,7 @@ class Parser {
 	  *
 	  * @param	mixed $name	Either a name as a string or as a Name object.
 	  */
-	  public function __construct($name)
+	  public function __construct($name = NULL)
 	 {
 		  $this->setName($name);
 	  }
@@ -38,26 +38,29 @@ class Parser {
 	  *
 	  * @param	mixed $name	Either a name as a string or as a Name object.
 	  */
-	  public function setName($name){
-		  if (get_class($name) == "Name") { // this is mostly for testing
-			  $this->nameStr = $name;
+	  public function setName($name = NULL){
+		  if ($name) {
+		  
+			  if (get_class($name) == "Name") { // this is mostly for testing
+				  $this->nameStr = $name;
+			  }
+			  else {
+				  $this->nameStr = new Name($name);
+			  }
+
+			  $this->leadingInit = "";
+			  $this->first = "";
+			  $this->nicknames = "";
+			  $this->middle = "";
+			  $this->last = "";
+			  $this->suffix = "";
+
+			  $this->suffixes = array('esq','esquire','jr','sr','2','ii','iii','iv');
+			  $this->prefixes = array('bar','ben','bin','da','dal','de la','del','der','di',
+							'e','ibn','la','le','san','st','ste','van', 'van der','vel','von');
+
+			  $this->parse();
 		  }
-		  else {
-			  $this->nameStr = new Name($name);
-		  }
-
-		  $this->leadingInit = "";
-		  $this->first = "";
-		  $this->nicknames = "";
-		  $this->middle = "";
-		  $this->last = "";
-		  $this->suffix = "";
-
-		  $this->suffixes = array('esq','esquire','jr','sr','2','ii','iii','iv');
-		  $this->prefixes = array('bar','ben','bin','da','dal','de la','del','der','di',
-						'e','ibn','la','le','san','st','ste','van', 'van der','vel','von');
-
-		  $this->parse();
 	  }
 	  
 	  public function getleadingInit() {
