@@ -4,7 +4,7 @@
  * Note that the string has to be UTF8-encoded.
  *
  */
-class Name {
+class HumanNameParser_Name {
     private $str;
 
 	 function __construct($str)

@@ -9,8 +9,8 @@
  *
  *
  */
-class Parser {
-    private $nameStr;
+class HumanNameParser_Parser {
+    private $name;
 	 private $leadingInit;
 	 private $first;
 	 private $nicknames;
@@ -41,11 +41,11 @@ class Parser {
 	  public function setName($name = NULL){
 		  if ($name) {
 		  
-			  if (get_class($name) == "Name") { // this is mostly for testing
-				  $this->nameStr = $name;
+			  if (get_class($name) == "HumanNameParser_Name") { // this is mostly for testing
+				  $this->name = $name;
 			  }
 			  else {
-				  $this->nameStr = new Name($name);
+				  $this->name = new HumanNameParser_Name($name);
 			  }
 
 			  $this->leadingInit = "";
@@ -133,31 +133,31 @@ class Parser {
 		  $firstRegex =			"/^[^ ]+/"; //
 
 		  // get nickname, if there is one
-		  $this->nicknames = $this->nameStr->chopWithRegex($nicknamesRegex, 2);
+		  $this->nicknames = $this->name->chopWithRegex($nicknamesRegex, 2);
 
 		  // get suffix, if there is one
-		  $this->suffix = $this->nameStr->chopWithRegex($suffixRegex, 1);
+		  $this->suffix = $this->name->chopWithRegex($suffixRegex, 1);
 
 		  // flip the before-comma and after-comma parts of the name
-		  $this->nameStr->flip(",");
+		  $this->name->flip(",");
 
 		  // get the last name
-		  $this->last = $this->nameStr->chopWithRegex($lastRegex, 0);
+		  $this->last = $this->name->chopWithRegex($lastRegex, 0);
 		  if (!$this->last){
 			  throw new Exception("Couldn't find a last name in '{$this->nameStr->getStr()}'.");
 		  }
 
 		  // get the first initial, if there is one
-		  $this->leadingInit = $this->nameStr->chopWithRegex($leadingInitRegex, 1);
+		  $this->leadingInit = $this->name->chopWithRegex($leadingInitRegex, 1);
 
 		  // get the first name
-		  $this->first = $this->nameStr->chopWithRegex($firstRegex, 0);
+		  $this->first = $this->name->chopWithRegex($firstRegex, 0);
 		  if (!$this->first){
 			  throw new Exception("Couldn't find a first name in '{$this->nameStr->getStr()}'");
 		  }
 
 		  // if anything's left, that's the middle name
-		  $this->middle = $this->nameStr->getStr();
+		  $this->middle = $this->name->getStr();
 		  return true;
 	  }
 

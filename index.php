@@ -55,7 +55,7 @@
 
 		  $handle = fopen('./Tests/testNames.txt', 'r');
 		  while ($nameArr = fgetcsv($handle, 1000, "|")){
-			  $parser = new Parser(new Name($nameArr[0]));
+			  $parser = new HumanNameParser_Parser($nameArr[0]);
 	
 			  // check to see if the parser got each name-part correct
 			  $ret  = testEqual($nameArr[1], $parser->getleadingInit()	);
