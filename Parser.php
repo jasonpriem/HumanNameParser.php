@@ -41,7 +41,7 @@ class HumanNameParser_Parser {
 	  public function setName($name = NULL){
 		  if ($name) {
 		  
-			  if (get_class($name) == "HumanNameParser_Name") { // this is mostly for testing
+			  if (is_object($name) && get_class($name) == "HumanNameParser_Name") { // this is mostly for testing
 				  $this->name = $name;
 			  }
 			  else {
@@ -84,6 +84,9 @@ class HumanNameParser_Parser {
 	  public function getSuffix() {
 		  return $this->suffix;
 	  }
+          public function getName(){
+              return $this->name;
+          }
 
 	  /**
 	   * returns all the parts of the name as an array
