@@ -1,10 +1,12 @@
 <?php
+
+namespace JasonPriem\HumanNameParser
 /**
  * Does cutting and matching stuff with a name string.
  * Note that the string has to be UTF8-encoded.
  *
  */
-class HumanNameParser_Name {
+class Name {
     private $str;
 
 	 function __construct($str)

@@ -7,7 +7,7 @@ class NameTest extends PHPUnit_Framework_TestCase {
 	protected $object;
 
 	protected function setUp() {
-		$this->object = new Name("Björn O'Malley");
+		$this->object = new JasonPriem\HumanNameParser\Name("Björn O'Malley");
 	}
 
 	public function testSetStrRemovesWhitespaceAtEnds() {
