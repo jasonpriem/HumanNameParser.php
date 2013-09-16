@@ -1,8 +1,8 @@
 <?php
 
-namespace JasonPriem\HumanNameParser
+namespace JasonPriem\HumanNameParser;
 
-use JasonPriem\HumanNameParser\Name
+use JasonPriem\HumanNameParser\Name;
 /**
  * Works with a Name object to parse out the parts of a name.
  *

@@ -1,6 +1,6 @@
 <?php
 
-namespace JasonPriem\HumanNameParser
+namespace JasonPriem\HumanNameParser;
 /**
  * Does cutting and matching stuff with a name string.
  * Note that the string has to be UTF8-encoded.
