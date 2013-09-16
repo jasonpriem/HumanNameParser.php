@@ -1,4 +1,4 @@
 {
-  "name": "jasonpriem/HumanNameParser",
+  "name": "jasonpriem/human-name-parser",
   "description": "Takes human names of arbitrary complexity and various wacky formats and parses them out"
 }
