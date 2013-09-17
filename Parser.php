@@ -1,4 +1,8 @@
 <?php
+
+namespace JasonPriem\HumanNameParser;
+
+use JasonPriem\HumanNameParser\Name;
 /**
  * Works with a Name object to parse out the parts of a name.
  *
@@ -9,7 +13,7 @@
  *
  *
  */
-class HumanNameParser_Parser {
+class Parser {
     private $name;
 	 private $leadingInit;
 	 private $first;
@@ -41,11 +45,11 @@ class HumanNameParser_Parser {
 	  public function setName($name = NULL){
 		  if ($name) {
 		  
-			  if (is_object($name) && get_class($name) == "HumanNameParser_Name") { // this is mostly for testing
+			  if (is_object($name) && get_class($name) == "Name") { // this is mostly for testing
 				  $this->name = $name;
 			  }
 			  else {
-				  $this->name = new HumanNameParser_Name($name);
+				  $this->name = new Name($name);
 			  }
 
 			  $this->leadingInit = "";
@@ -109,7 +113,7 @@ class HumanNameParser_Parser {
 			  return array_values($arr);
 		  }
 		  else {
-			  throw new Exception("Array must be associative ('assoc') or numeric ('num').");
+			  throw new \Exception("Array must be associative ('assoc') or numeric ('num').");
 		  }
 	  }
 
@@ -147,7 +151,7 @@ class HumanNameParser_Parser {
 		  // get the last name
 		  $this->last = $this->name->chopWithRegex($lastRegex, 0);
 		  if (!$this->last){
-			  throw new Exception("Couldn't find a last name in '{$this->name->getStr()}'.");
+			  throw new \Exception("Couldn't find a last name in '{$this->name->getStr()}'.");
 		  }
 
 		  // get the first initial, if there is one
@@ -156,7 +160,7 @@ class HumanNameParser_Parser {
 		  // get the first name
 		  $this->first = $this->name->chopWithRegex($firstRegex, 0);
 		  if (!$this->first){
-			  throw new Exception("Couldn't find a first name in '{$this->name->getStr()}'");
+			  throw new \Exception("Couldn't find a first name in '{$this->name->getStr()}'");
 		  }
 
 		  // if anything's left, that's the middle name
