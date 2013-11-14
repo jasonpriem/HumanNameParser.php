@@ -1,0 +1,20 @@
+{
+    "name": "davidgorges/human-name-parser",
+    "description": "Parses a human name",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Gorges",
+            "email": "david.gorges@leaphub.de"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },  
+    "autoload": {
+        "psr-0": {"HumanNameParser\\": "src/"}
+    }
+}
