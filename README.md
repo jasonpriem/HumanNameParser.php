@@ -1,5 +1,7 @@
 Fork from HumanNameParser.php origninally by Jason Priem <jason@jasonpriem.com>
 
+[![Build Status](https://travis-ci.org/davidgorges/HumanNameParser.php.png)](https://travis-ci.org/davidgorges/HumanNameParser.php)
+
 
 # Description
 Takes human names of arbitrary complexity and various wacky formats like:
@@ -22,13 +24,12 @@ and parses out the:
 
 # How to use
 
-´´´php
+```php
 use HumanNameParser\Parser;
 use HumanNameParser\Name;
 
-...
 $nameparser = new HumanNameParser();
 $name = $nameparser->parse("Alfonso Ribeiro");
 
 echo "Hello " . $name->getFirstName();
-´´´
+```
