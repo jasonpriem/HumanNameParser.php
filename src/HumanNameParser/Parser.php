@@ -107,6 +107,8 @@ class Parser {
 
     /**
      * @param  string $academicTitles
+     * 
+     * @return Parser
      */
     private function findAcademicTitle($academicTitles)
     {
@@ -121,6 +123,9 @@ class Parser {
     }
 
 
+    /**
+     * @return Parser
+     */
     private function findNicknames()
     {
         $nicknames = $this->findWithRegex(self::REGEX_NICKNAMES, 2);
@@ -185,6 +190,7 @@ class Parser {
 
         return $this;
     }
+
     /**
      * @return Parser
      */
@@ -212,6 +218,10 @@ class Parser {
         return $this;
     }
 
+
+    /**
+     * @return string
+     */
     private function findWithRegex($regex, $submatchIndex = 0)
     {
         $regex = $regex . "ui"; // unicode + case-insensitive
@@ -221,6 +231,10 @@ class Parser {
         return $subset;
     }
 
+
+    /**
+     * @return void
+     */
     private function removeTokenWithRegex($regex) 
     {
         $numReplacements = 0; 
@@ -233,12 +247,12 @@ class Parser {
     }
 
     /**
-    * Removes extra whitespace and punctuation from string
-    * Strips whitespace chars from ends, strips redundant whitespace, converts whitespace chars to " ".
-    * 
-    * @param string $taintedString
-    * 
-    * @return string
+     * Removes extra whitespace and punctuation from string
+     * Strips whitespace chars from ends, strips redundant whitespace, converts whitespace chars to " ".
+     * 
+     * @param string $taintedString
+     * 
+     * @return string
     */
     private function normalize($taintedString)
     {
@@ -250,7 +264,9 @@ class Parser {
          return $taintedString;
     }
 
-
+    /**
+     * @return Parser
+     */
     private function flipNameToken() 
     {
         $this->nameToken = $this->flipStringPartsAround($this->nameToken, ",");
