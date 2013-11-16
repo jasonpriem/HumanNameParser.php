@@ -37,6 +37,15 @@ class NameTest extends \PHPUnit_Framework_TestCase {
 
     public function testReverseWithAcademicTitle()
     {
+        $name = 'Dr. Meiser, Hans';
+        $nameObject = $this->parser->parse($name);
+        $this->assertEquals('Dr.', $nameObject->getAcademicTitle());
+        $this->assertEquals('Meiser', $nameObject->getLastName());
+        $this->assertEquals('Hans', $nameObject->getFirstName());
+    }
+
+    public function testithAcademicTitle()
+    {
         $name = 'Dr. Hans Meiser';
         $nameObject = $this->parser->parse($name);
         $this->assertEquals('Dr.', $nameObject->getAcademicTitle());
@@ -52,10 +61,7 @@ class NameTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('Björn', $nameObject->getFirstName());
     }
 
-    /**
-     * @skip
-     * @return [type] [description]
-     */
+
     public function testNameList()
     {
         $names = $this->getNames();
@@ -63,14 +69,12 @@ class NameTest extends \PHPUnit_Framework_TestCase {
             $nameparts = explode(';', $nameStr);
             $name = $nameparts[0];
             $nameObject = $this->parser->parse($name);
-            var_dump($name);
             $this->assertEquals($nameparts[1], $nameObject->getLeadingInitial(), sprintf("failed to ensure correct leading initial (%s) in name %s", $nameparts[1], $name));
             $this->assertEquals($nameparts[2], $nameObject->getFirstName(),      sprintf("failed to ensure correct first name (%s) in name %s", $nameparts[2], $name));
             $this->assertEquals($nameparts[3], $nameObject->getNickNames(),      sprintf("failed to ensure correct nickname (%s) in name %s", $nameparts[3], $name));
             $this->assertEquals($nameparts[4], $nameObject->getMiddleName(),     sprintf("failed to ensure correct middle name (%s) in name %s", $nameparts[4], $name));
             $this->assertEquals($nameparts[5], $nameObject->getLastName(),       sprintf("failed to ensure correct last name (%s) in name %s", $nameparts[5], $name));
             $this->assertEquals($nameparts[6], $nameObject->getSuffix(),         sprintf("failed to ensure correct suffix (%s) in name %s", $nameparts[6], $name));
-           // $this->assertEquals($nameparts[2], $nameObject->getFirstName());
 
        }
     }
