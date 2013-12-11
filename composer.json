@@ -6,6 +6,10 @@
         {
             "name": "David Gorges",
             "email": "david.gorges@leaphub.de"
+        },
+        {
+            "name": "Jason Priem",
+            "email": "jason@jasonpriem.com"
         }
     ],
     "require": {
