@@ -33,3 +33,7 @@ $name = $nameparser->parse("Alfonso Ribeiro");
 
 echo "Hello " . $name->getFirstName();
 ```
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/davidgorges/humannameparser.php/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
