@@ -43,6 +43,16 @@ class Parser {
      */
     private $nameToken = null;
 
+    /**
+     * @var boolean
+     */
+    private $mandatoryFirstName = true;
+
+    /**
+     * @var boolean
+     */
+    private $mandatoryLastName = true;
+
      /*
       * Constructor
       *
@@ -64,6 +74,12 @@ class Parser {
         if (!isset($options['academic_titles']))
         {
             $options['academic_titles'] =  array('ms','miss','mrs','mr','prof','dr');
+        }
+        if (isset($options['mandatory_first_name'])) {
+            $this->mandatoryFirstName = (boolean) $options['mandatory_first_name'];
+        }
+        if (isset($options['mandatory_last_name'])) {
+            $this->mandatoryLastName = (boolean) $options['mandatory_last_name'];
         }
 
         $this->setSuffixes($options['suffixes']);
@@ -166,7 +182,7 @@ class Parser {
         if($lastName) {
             $this->name->setLastName($lastName);
             $this->removeTokenWithRegex($regex);
-        } else {
+        } elseif ($this->mandatoryLastName){
 
             throw new LastNameNotFoundException("Couldn't find a last name.");
         }
@@ -183,9 +199,9 @@ class Parser {
         if($lastName) {
             $this->name->setFirstName($lastName);
             $this->removeTokenWithRegex(self::REGEX_FIRST_NAME);
-        } else {
+        } elseif ($this->mandatoryFirstName) {
 
-            throw new FirstNameNotFoundException("Couldn't find a last name.");
+            throw new FirstNameNotFoundException("Couldn't find a first name.");
         }
 
         return $this;
