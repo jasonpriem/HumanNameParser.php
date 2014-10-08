@@ -61,6 +61,52 @@ class NameTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('Björn', $nameObject->getFirstName());
     }
 
+    public function testNoFirstNameDefaultException()
+    {
+        $name = 'Mr. Hyde';
+        $this->setExpectedException('HumanNameParser\Exception\FirstNameNotFoundException');
+        $this->parser->parse($name);
+    }
+
+    public function testNoLastNameDefaultException()
+    {
+        $name = 'Edward';
+        $this->setExpectedException('HumanNameParser\Exception\LastNameNotFoundException');
+        $this->parser->parse($name);
+    }
+
+    public function testFirstNameNotMandatory()
+    {
+        $this->parser = new Parser(array('mandatory_first_name' => false));
+        $name = 'Dr. Jekyll';
+        $nameObject = $this->parser->parse($name);
+        $this->assertEquals('Dr.', $nameObject->getAcademicTitle());
+        $this->assertEquals('Jekyll', $nameObject->getLastName());
+    }
+
+    public function testLastNameNotMandatory()
+    {
+        $this->parser = new Parser(array('mandatory_last_name' => false));
+        $name = 'Henry';
+        $nameObject = $this->parser->parse($name);
+        $this->assertEquals('Henry', $nameObject->getFirstName());
+    }
+
+    public function testFirstNameMandatory()
+    {
+        $this->parser = new Parser(array('mandatory_first_name' => true));
+        $name = 'Mr. Hyde';
+        $this->setExpectedException('HumanNameParser\Exception\FirstNameNotFoundException');
+        $this->parser->parse($name);
+    }
+
+    public function testLastNameMandatory()
+    {
+        $this->parser = new Parser(array('mandatory_last_name' => true));
+        $name = 'Edward';
+        $this->setExpectedException('HumanNameParser\Exception\LastNameNotFoundException');
+        $this->parser->parse($name);
+    }
 
     public function testNameList()
     {
