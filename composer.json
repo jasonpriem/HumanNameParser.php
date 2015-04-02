@@ -3,5 +3,8 @@
   "description": "Takes human names of arbitrary complexity and various wacky formats and parses them out.",
   "autoload": {
         "classmap": ["Name.php", "Parser.php"]
+  },
+  "require-dev": {
+          "phpunit/phpunit": "4.5.*"
   }
 }
