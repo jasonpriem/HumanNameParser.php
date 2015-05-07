@@ -27,5 +27,3 @@ and parses out the:
 * last name (including compound ones like "van der Sar' and "Ortega y Gasset"), and
 * suffix (like 'Jr.', 'III')
 
-See [the website](http://jasonpriem.com/human-name-parse) for usage, features, issues, credits, and documentation.
-You can also leave comments and requests there.
