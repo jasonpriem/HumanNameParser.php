@@ -1,13 +1,11 @@
 <?php
-require_once 'PHPUnit/Framework.php';
 require_once dirname(__FILE__).'/../Name.php';
-
 class NameTest extends PHPUnit_Framework_TestCase {
 
 	protected $object;
 
 	protected function setUp() {
-		$this->object = new Name("Björn O'Malley");
+		$this->object = new HumanNameParser_Name("Björn O'Malley");
 	}
 
 	public function testSetStrRemovesWhitespaceAtEnds() {
@@ -66,9 +64,6 @@ class NameTest extends PHPUnit_Framework_TestCase {
 				  $this->object->getStr()
 				  );
 	}
-
-
-
 
 }
 ?>
