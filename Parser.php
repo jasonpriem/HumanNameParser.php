@@ -144,14 +144,14 @@ class HumanNameParser_Parser {
 		  // flip the before-comma and after-comma parts of the name
 		  $this->name->flip(",");
 
+		  // get the first initial, if there is one
+		  $this->leadingInit = $this->name->chopWithRegex($leadingInitRegex, 1);
+
 		  // get the last name
 		  $this->last = $this->name->chopWithRegex($lastRegex, 0);
 		  if (!$this->last){
 			  throw new Exception("Couldn't find a last name in '{$this->name->getStr()}'.");
 		  }
-
-		  // get the first initial, if there is one
-		  $this->leadingInit = $this->name->chopWithRegex($leadingInitRegex, 1);
 
 		  // get the first name
 		  $this->first = $this->name->chopWithRegex($firstRegex, 0);
