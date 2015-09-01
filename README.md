@@ -26,9 +26,8 @@ and parses out the:
 
 ```php
 use HumanNameParser\Parser;
-use HumanNameParser\Name;
 
-$nameparser = new HumanNameParser();
+$nameparser = new Parser();
 $name = $nameparser->parse("Alfonso Ribeiro");
 
 echo "Hello " . $name->getFirstName();
