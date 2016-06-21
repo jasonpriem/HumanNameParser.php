@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Split a single name string into it' name parts (firs tname, last name, titles, middle names)
+ * Split a single name string into it's name parts (first name, last name, titles, middle names)
  */
 
 namespace HumanNameParser;
@@ -15,7 +15,7 @@ class Parser {
 
     // The regex use is a bit tricky.  *Everything* matched by the regex will be replaced,
     //    but you can select a particular parenthesized submatch to be returned.
-    //    Also, note that each regex requres that the preceding ones have been run, and matches chopped out.
+    //    Also, note that each regex requires that the preceding ones have been run, and matches chopped out.
     CONST REGEX_NICKNAMES       =  "/ ('|\"|\(\"*'*)(.+?)('|\"|\"*'*\)) /i"; // names that starts or end w/ an apostrophe break this
     CONST REGEX_TITLES          =  "/^(%s)\.*/i";
     CONST REGEX_SUFFIX          =  "/(\*,) *(%s)$/i";
@@ -88,15 +88,13 @@ class Parser {
     }
 
 
-      
-
     /**
      * Parse the name into its constituent parts.
      *
-     * 
+     *
      * @return Name the parsed name
      */
-    public function parse($name) 
+    public function parse($name)
     {
         $suffixes = implode("\.*|", $this->suffixes) . "\.*"; // each suffix gets a "\.*" behind it.
         $prefixes = implode(" |", $this->prefixes) . " "; // each prefix gets a " " behind it.
@@ -105,13 +103,16 @@ class Parser {
         $this->nameToken = $name;
         $this->name = new Name();
 
+        // Flip on slashes before any other transformations
+        $this->flipNameToken("\/");
+
         $this->findAcademicTitle($academicTitles);
         $this->findNicknames();
 
-
         $this->findSuffix($suffixes);
-        $this->flipNameToken();
 
+        // Flip on commas
+        $this->flipNameToken(",");
 
         $this->findLastName($prefixes);
         $this->findLeadingInitial();
@@ -123,7 +124,7 @@ class Parser {
 
     /**
      * @param  string $academicTitles
-     * 
+     *
      * @return Parser
      */
     private function findAcademicTitle($academicTitles)
@@ -155,7 +156,7 @@ class Parser {
 
     /**
      * @param  string $suffixes
-     * 
+     *
      * @return Parser
      */
     private function findSuffix($suffixes)
@@ -216,7 +217,7 @@ class Parser {
         if($leadingInitial) {
             $this->name->setLeadingInitial($leadingInitial);
             $this->removeTokenWithRegex(self::REGEX_LEADING_INITIAL);
-        } 
+        }
 
         return $this;
     }
@@ -229,7 +230,7 @@ class Parser {
         $middleName = trim($this->nameToken);
         if($middleName) {
             $this->name->setMiddleName($middleName);
-        } 
+        }
 
         return $this;
     }
@@ -251,9 +252,9 @@ class Parser {
     /**
      * @return void
      */
-    private function removeTokenWithRegex($regex) 
+    private function removeTokenWithRegex($regex)
     {
-        $numReplacements = 0; 
+        $numReplacements = 0;
         $tokenRemoved = preg_replace($regex, ' ', $this->nameToken, -1, $numReplacements);
         if ($numReplacements > 1) {
             throw new NameParsingException("The regex being used has multiple matches.");
@@ -265,9 +266,9 @@ class Parser {
     /**
      * Removes extra whitespace and punctuation from string
      * Strips whitespace chars from ends, strips redundant whitespace, converts whitespace chars to " ".
-     * 
+     *
      * @param string $taintedString
-     * 
+     *
      * @return string
     */
     private function normalize($taintedString)
@@ -276,29 +277,30 @@ class Parser {
          $taintedString = preg_replace( "#\s*$#u", "", $taintedString );
          $taintedString = preg_replace( "#\s+#u", " ", $taintedString );
          $taintedString = preg_replace( "#,$#u", " ", $taintedString );
-         
+
          return $taintedString;
     }
 
     /**
      * @return Parser
+     * @param string $pattern
      */
-    private function flipNameToken() 
+    private function flipNameToken($pattern = ",")
     {
-        $this->nameToken = $this->flipStringPartsAround($this->nameToken, ",");
+        $this->nameToken = $this->flipStringPartsAround($this->nameToken, $pattern);
 
         return $this;
     }
 
-    
+
     /**
      * Flips the front and back parts of a name with one another.
      * Front and back are determined by a specified character somewhere in the
      * middle of the string.
      *
      * @param  String $flipAroundChar  the character(s) demarcating the two halves you want to flip.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     private function flipStringPartsAround($string, $char)
     {
@@ -314,7 +316,7 @@ class Parser {
        }
 
        return $string;
-    }  
+    }
 
     /**
      * Gets the value of suffixes.
@@ -349,7 +351,7 @@ class Parser {
     {
         return $this->prefixes;
     }
-    
+
     /**
      * Sets the value of prefixes.
      *
@@ -373,7 +375,7 @@ class Parser {
     {
         return $this->academicTitles;
     }
-    
+
     /**
      * Sets the value of academicTitles.
      *

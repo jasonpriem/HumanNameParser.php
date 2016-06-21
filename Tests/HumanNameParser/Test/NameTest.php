@@ -10,8 +10,7 @@ class NameTest extends \PHPUnit_Framework_TestCase {
         $this->parser = new Parser();
     }
 
-
-    public function testSuffix() 
+    public function testSuffix()
     {
         $name = 'Björn O\'Malley, Jr.';
         $nameObject = $this->parser->parse($name);
@@ -35,6 +34,14 @@ class NameTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('Meiser', $nameObject->getLastName());
     }
 
+    public function testReverseWithSlash()
+    {
+        $name = 'Smith / Joe';
+        $nameObject = $this->parser->parse($name);
+        $this->assertEquals('Joe', $nameObject->getFirstName());
+        $this->assertEquals('Smith', $nameObject->getLastName());
+    }
+
     public function testReverseWithAcademicTitle()
     {
         $name = 'Dr. Meiser, Hans';
@@ -53,7 +60,7 @@ class NameTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('Hans', $nameObject->getFirstName());
     }
 
-    public function testLastNameWithPrefix() 
+    public function testLastNameWithPrefix()
     {
         $name = 'Björn van Olst';
         $nameObject = $this->parser->parse($name);
@@ -125,9 +132,10 @@ class NameTest extends \PHPUnit_Framework_TestCase {
        }
     }
 
-    private function getNames() 
+    private function getNames()
     {
-        return array('Björn O\'Malley;;Björn;;;O\'Malley;',
+        return array(
+            'Björn O\'Malley;;Björn;;;O\'Malley;',
             'Bin Lin;;Bin;;;Lin;',
             'Linda Jones;;Linda;;;Jones;',
             'Jason H. Priem;;Jason;;H.;Priem;',
@@ -157,6 +165,11 @@ class NameTest extends \PHPUnit_Framework_TestCase {
             'O\'Malley, Björn Jr;;Björn;;;O\'Malley;Jr',
             'O\'Malley, C. Björn;C.;Björn;;;O\'Malley;',
             'O\'Malley, C. Björn III;C.;Björn;;;O\'Malley;III',
-            'O\'Malley y Muñoz, C. Björn Roger III;C.;Björn;;Roger;O\'Malley y Muñoz;III');
+            'O\'Malley y Muñoz, C. Björn Roger III;C.;Björn;;Roger;O\'Malley y Muñoz;III',
+            'O\'Malley / C. Björn;C.;Björn;;;O\'Malley;',
+            'Smith / Joe;;Joe;;;Smith;',
+            'Smith/ Ms Jane Middle;;Jane;;Middle;Smith;',
+            'Smith Jr / Dr Joe;;Joe;;;Smith;Jr',
+        );
     }
 }
