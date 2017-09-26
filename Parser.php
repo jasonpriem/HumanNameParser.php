@@ -55,7 +55,7 @@ class HumanNameParser_Parser {
 			$this->last = "";
 			$this->suffix = "";
 
-			$this->suffixes = array('esq','esquire','jr','sr','2','ii','iii','iv', 'v');
+			$this->suffixes = array('esq','esquire','jr','sr','2','ii','iii','iv', 'v', 'phd');
 			$this->prefixes = array('bar','ben','bin','da','dal','de la', 'de', 'del','der','di',
 				'ibn','la','le','san','st','ste','van', 'van der', 'van den', 'vel','von');
 
