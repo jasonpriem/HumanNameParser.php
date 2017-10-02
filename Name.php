@@ -94,7 +94,7 @@ class HumanNameParser_Name {
 	{
 		 $this->str = preg_replace( "#^\s*#u", "", $this->str );
 		 $this->str = preg_replace( "#\s*$#u", "", $this->str );
-		 $this->str = preg_replace( "#\s+#u", " ", $this->str );
+		 if (substr_count($this->str, "\xc2\xa0") == 0) $this->str = preg_replace( "#\s+#u", " ", $this->str );
 		 $this->str = preg_replace( "#,$#u", " ", $this->str );
 		 return true;
 	}
