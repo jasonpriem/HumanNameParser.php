@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpunit
     colors="true"
-    bootstrap="Tests/HumanNameParser/Test/bootstrap.php">
+    bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="Human Name Parser tests">
             <directory>Tests</directory>
