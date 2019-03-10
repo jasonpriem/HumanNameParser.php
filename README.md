@@ -1,13 +1,13 @@
 
 <p align="center">
-	[![Build Status](https://travis-ci.org/davidgorges/HumanNameParser.php.png)](https://travis-ci.org/davidgorges/HumanNameParser.php)
+	<a href="(https://travis-ci.org/davidgorges/HumanNameParser.php"><img src="https://travis-ci.org/davidgorges/HumanNameParser.php.png"></a>
 	<a href="https://packagist.org/packages/davidgorges/human-name-parser"><img src="https://poser.pugx.org/davidgorges/human-name-parser/v/stable" alt="Latest Stable Version"></a>
 	<a href="https://github.com/davidgorges/HumanNameParser.php"><img src="https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat" alt="PHPStan Enabled"></a>
 </p>
 
 ------ 
 
-
+*Note*: The 1.0 release requires PHP > 7.1.
 
 # Description
 Fork from HumanNameParser.php origninally by Jason Priem <jason@jasonpriem.com>. Takes human names of arbitrary complexity and various wacky formats like:
