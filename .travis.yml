@@ -4,8 +4,10 @@ php:
   - "7.2"
   - "7.1"
 
+install: composer install
+
 script:
-  - phpunit
+  - vendor/bin/phpunit
   - vendor/bin/phpstan.phar analyse -l max -c phpstan.neon src --no-interaction --no-progress
 
 
