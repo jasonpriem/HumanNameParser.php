@@ -1,9 +1,15 @@
 <?php
 
 namespace HumanNameParser\Test;
-use HumanNameParser\Parser as Parser;
+use HumanNameParser\Parser;
+use PHPUnit\Framework\TestCase;
 
-class NameTest extends \PHPUnit_Framework_TestCase {
+class NameTest extends TestCase {
+
+    /**
+     * @var Parser
+     */
+    private $parser;
 
     public function setUp()
     {
@@ -71,14 +77,14 @@ class NameTest extends \PHPUnit_Framework_TestCase {
     public function testNoFirstNameDefaultException()
     {
         $name = 'Mr. Hyde';
-        $this->setExpectedException('HumanNameParser\Exception\FirstNameNotFoundException');
+        $this->expectException('HumanNameParser\Exception\FirstNameNotFoundException');
         $this->parser->parse($name);
     }
 
     public function testNoLastNameDefaultException()
     {
         $name = 'Edward';
-        $this->setExpectedException('HumanNameParser\Exception\LastNameNotFoundException');
+        $this->expectException('HumanNameParser\Exception\LastNameNotFoundException');
         $this->parser->parse($name);
     }
 
@@ -103,7 +109,7 @@ class NameTest extends \PHPUnit_Framework_TestCase {
     {
         $this->parser = new Parser(array('mandatory_first_name' => true));
         $name = 'Mr. Hyde';
-        $this->setExpectedException('HumanNameParser\Exception\FirstNameNotFoundException');
+        $this->expectException('HumanNameParser\Exception\FirstNameNotFoundException');
         $this->parser->parse($name);
     }
 
@@ -111,7 +117,7 @@ class NameTest extends \PHPUnit_Framework_TestCase {
     {
         $this->parser = new Parser(array('mandatory_last_name' => true));
         $name = 'Edward';
-        $this->setExpectedException('HumanNameParser\Exception\LastNameNotFoundException');
+        $this->expectException('HumanNameParser\Exception\LastNameNotFoundException');
         $this->parser->parse($name);
     }
 
