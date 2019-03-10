@@ -4,7 +4,10 @@ php:
   - "7.2"
   - "7.1"
 
-script: phpunit
+script:
+  - phpunit
+  - vendor/bin/phpstan.phar analyse -l max -c phpstan.neon src --no-interaction --no-progress
+
 
 notifications:
   recipients:
