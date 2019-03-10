@@ -11,17 +11,18 @@ use HumanNameParser\Exception\FirstNameNotFoundException;
 use HumanNameParser\Exception\LastNameNotFoundException;
 use HumanNameParser\Exception\NameParsingException;
 
-class Parser {
+class Parser
+{
 
     // The regex use is a bit tricky.  *Everything* matched by the regex will be replaced,
     //    but you can select a particular parenthesized submatch to be returned.
     //    Also, note that each regex requires that the preceding ones have been run, and matches chopped out.
-    CONST REGEX_NICKNAMES       =  "/ ('|\"|\(\"*'*)(.+?)('|\"|\"*'*\)) /i"; // names that starts or end w/ an apostrophe break this
-    CONST REGEX_TITLES          =  "/^(%s)\.*/i";
-    CONST REGEX_SUFFIX          =  "/(\*,) *(%s)$/i";
-    CONST REGEX_LAST_NAME       =  "/(?!^)\b([^ ]+ y |%s)*[^ ]+$/i";
-    CONST REGEX_LEADING_INITIAL =  "/^(.\.*)(?= \p{L}{2})/i"; // note the lookahead, which isn't returned or replaced
-    CONST REGEX_FIRST_NAME      =  "/^[^ ]+/i"; //
+    CONST REGEX_NICKNAMES = "/ ('|\"|\(\"*'*)(.+?)('|\"|\"*'*\)) /i"; // names that starts or end w/ an apostrophe break this
+    CONST REGEX_TITLES = "/^(%s)\.*/i";
+    CONST REGEX_SUFFIX = "/(\*,) *(%s)$/i";
+    CONST REGEX_LAST_NAME = "/(?!^)\b([^ ]+ y |%s)*[^ ]+$/i";
+    CONST REGEX_LEADING_INITIAL = "/^(.\.*)(?= \p{L}{2})/i"; // note the lookahead, which isn't returned or replaced
+    CONST REGEX_FIRST_NAME = "/^[^ ]+/i"; //
 
     /**
      * @var array
@@ -53,35 +54,38 @@ class Parser {
      */
     private $mandatoryLastName = true;
 
-     /*
-      * Constructor
-      *
-      * @param array of options
-      *                 'suffixes' for an array of suffixes
-      *                 'prefix' for an array of prefixes
-      */
+    /**
+     * @var Name
+     */
+    private $name;
+
+    /*
+     * Constructor
+     *
+     * @param array of options
+     *                 'suffixes' for an array of suffixes
+     *                 'prefix' for an array of prefixes
+     */
     public function __construct($options = array())
     {
-        if (!isset($options['suffixes']))
-        {
-            $options['suffixes'] = array('esq','esquire','jr','sr','2','ii','iii','iv');
+        if (!isset($options['suffixes'])) {
+            $options['suffixes'] = array('esq', 'esquire', 'jr', 'sr', '2', 'ii', 'iii', 'iv');
         }
-        if (!isset($options['prefixes']))
-        {
-            $options['prefixes'] =  array('bar','ben','bin','da','dal','de la', 'de', 'del','der','di',
-                          'ibn','la','le','san','st','ste','van', 'van der', 'van den', 'vel','von');
+        if (!isset($options['prefixes'])) {
+            $options['prefixes'] = array('bar', 'ben', 'bin', 'da', 'dal', 'de la', 'de', 'del', 'der', 'di',
+                'ibn', 'la', 'le', 'san', 'st', 'ste', 'van', 'van der', 'van den', 'vel', 'von');
         }
-        if (!isset($options['academic_titles']))
-        {
-            $options['academic_titles'] =  array('ms','miss','mrs','mr','prof','dr');
+        if (!isset($options['academic_titles'])) {
+            $options['academic_titles'] = array('ms', 'miss', 'mrs', 'mr', 'prof', 'dr');
         }
         if (isset($options['mandatory_first_name'])) {
-            $this->mandatoryFirstName = (boolean) $options['mandatory_first_name'];
+            $this->mandatoryFirstName = (boolean)$options['mandatory_first_name'];
         }
         if (isset($options['mandatory_last_name'])) {
-            $this->mandatoryLastName = (boolean) $options['mandatory_last_name'];
+            $this->mandatoryLastName = (boolean)$options['mandatory_last_name'];
         }
 
+        $this->name = new Name();
         $this->setSuffixes($options['suffixes']);
         $this->setPrefixes($options['prefixes']);
         $this->setAcademicTitles($options['academic_titles']);
@@ -131,7 +135,7 @@ class Parser {
     {
         $regex = sprintf(self::REGEX_TITLES, $academicTitles);
         $title = $this->findWithRegex($regex, 1);
-        if($title) {
+        if ($title) {
             $this->name->setAcademicTitle($title);
             $this->nameToken = str_ireplace($title, "", $this->nameToken);
         }
@@ -146,7 +150,7 @@ class Parser {
     private function findNicknames()
     {
         $nicknames = $this->findWithRegex(self::REGEX_NICKNAMES, 2);
-        if($nicknames) {
+        if ($nicknames) {
             $this->name->setNicknames($nicknames);
             $this->removeTokenWithRegex(self::REGEX_NICKNAMES);
         }
@@ -165,7 +169,7 @@ class Parser {
         //var_dump($regex); die;
         //$regex = sprintf(self::REGEX_SUFFIX, $suffixes);
         $suffix = $this->findWithRegex($regex, 1);
-        if($suffix) {
+        if ($suffix) {
             $this->name->setSuffix($suffix);
             $this->removeTokenWithRegex($regex);
         }
@@ -180,10 +184,10 @@ class Parser {
     {
         $regex = sprintf(self::REGEX_LAST_NAME, $prefixes);
         $lastName = $this->findWithRegex($regex, 0);
-        if($lastName) {
+        if ($lastName) {
             $this->name->setLastName($lastName);
             $this->removeTokenWithRegex($regex);
-        } elseif ($this->mandatoryLastName){
+        } elseif ($this->mandatoryLastName) {
 
             throw new LastNameNotFoundException("Couldn't find a last name.");
         }
@@ -197,7 +201,7 @@ class Parser {
     private function findFirstName()
     {
         $lastName = $this->findWithRegex(self::REGEX_FIRST_NAME, 0);
-        if($lastName) {
+        if ($lastName) {
             $this->name->setFirstName($lastName);
             $this->removeTokenWithRegex(self::REGEX_FIRST_NAME);
         } elseif ($this->mandatoryFirstName) {
@@ -214,7 +218,7 @@ class Parser {
     private function findLeadingInitial()
     {
         $leadingInitial = $this->findWithRegex(self::REGEX_LEADING_INITIAL, 1);
-        if($leadingInitial) {
+        if ($leadingInitial) {
             $this->name->setLeadingInitial($leadingInitial);
             $this->removeTokenWithRegex(self::REGEX_LEADING_INITIAL);
         }
@@ -228,7 +232,7 @@ class Parser {
     private function findMiddleName()
     {
         $middleName = trim($this->nameToken);
-        if($middleName) {
+        if ($middleName) {
             $this->name->setMiddleName($middleName);
         }
 
@@ -250,14 +254,20 @@ class Parser {
 
 
     /**
+     * @param string $regex
+     *
      * @return void
+     * @throws NameParsingException
      */
     private function removeTokenWithRegex($regex)
     {
         $numReplacements = 0;
         $tokenRemoved = preg_replace($regex, ' ', $this->nameToken, -1, $numReplacements);
         if ($numReplacements > 1) {
-            throw new NameParsingException("The regex being used has multiple matches.");
+            throw new NameParsingException('The regex being used has multiple matches.');
+        }
+        if (!is_string($tokenRemoved)) {
+            throw new NameParsingException('The regex being used has multiple matches.');
         }
 
         $this->nameToken = $this->normalize($tokenRemoved);
@@ -270,20 +280,26 @@ class Parser {
      * @param string $taintedString
      *
      * @return string
-    */
+     */
     private function normalize($taintedString)
     {
-         $taintedString = preg_replace( "#^\s*#u", "", $taintedString );
-         $taintedString = preg_replace( "#\s*$#u", "", $taintedString );
-         $taintedString = preg_replace( "#\s+#u", " ", $taintedString );
-         $taintedString = preg_replace( "#,$#u", " ", $taintedString );
+        if (!is_string($taintedString)) {
+            throw new \InvalidArgumentException('Parameter is expected to be a string.');
+        }
+        $taintedString = preg_replace("#^\s*#u", '', (string) $taintedString);
+        $taintedString = preg_replace("#\s*$#u", '', (string) $taintedString);
+        $taintedString = preg_replace("#\s+#u", ' ', (string) $taintedString);
+        $taintedString = preg_replace('#,$#u', ' ', (string) $taintedString);
 
-         return $taintedString;
+        return (string) $taintedString;
     }
 
     /**
      * @return Parser
+     *
      * @param string $pattern
+     *
+     * @throws NameParsingException
      */
     private function flipNameToken($pattern = ",")
     {
@@ -298,24 +314,28 @@ class Parser {
      * Front and back are determined by a specified character somewhere in the
      * middle of the string.
      *
-     * @param  String $flipAroundChar  the character(s) demarcating the two halves you want to flip.
+     * @param string $string unparsed name
+     * @param string $char character, for which to flip.
      *
      * @return string
+     * @throws NameParsingException
      */
     private function flipStringPartsAround($string, $char)
     {
-       $substrings = preg_split("/$char/u", $string);
+        $substrings = preg_split("/$char/u", (string) $string);
+        if(!is_array($substrings)) {
+            throw new NameParsingException('Could not flip characters.');
+        }
 
-       if (count($substrings) == 2) {
-           $string = $substrings[1] . " " . $substrings[0];
-           $string = $this->normalize($string);
-       }
-       else if (count($substrings) > 2) {
+        if (\count($substrings) === 2) {
+            $string = $substrings[1] . ' ' . $substrings[0];
+            $string = $this->normalize($string);
+        } else if (\count($substrings) > 2) {
 
-           throw new NameParsingException("Can't flip around multiple '$char' characters in namestring.");
-       }
+            throw new NameParsingException("Can't flip around multiple '$char' characters in namestring.");
+        }
 
-       return $string;
+        return $string;
     }
 
     /**

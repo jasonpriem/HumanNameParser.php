@@ -186,7 +186,7 @@ class Name {
     /**
      * Gets the value of academicTitle.
      *
-     * @return academicTitle
+     * @return string
      */
     public function getAcademicTitle()
     {
